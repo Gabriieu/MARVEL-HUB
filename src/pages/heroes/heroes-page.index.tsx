@@ -19,7 +19,7 @@ export const HeroesPage = () => {
   const { getHeroes, heroes, getHeroesPage, perPageHeroes, totalHeroes } =
     useContext(MainContext);
   const [totalPages, setTotalPages] = useState<number>(0);
-  const [currentPage, setCurrentPage] = useState<number>(0); // Inicializa currentPage como 0
+  const [currentPage, setCurrentPage] = useState<number>(0);
 
   const goToFirstPage = () => {
     getHeroesPage(0);
@@ -28,11 +28,10 @@ export const HeroesPage = () => {
 
   const goToLastPage = () => {
     getHeroesPage(totalPages - 1);
-    setCurrentPage(totalPages - 1); // Corrige para atualizar currentPage corretamente
+    setCurrentPage(totalPages - 1);
   };
 
   const goToNextPage = () => {
-    // Verifica se a próxima página está dentro dos limites
     getHeroesPage(currentPage + 1);
     setCurrentPage(currentPage + 1);
   };
@@ -40,7 +39,6 @@ export const HeroesPage = () => {
   const goToPreviousPage = () => {
     const previousPage = currentPage - 1;
     if (previousPage >= 0) {
-      // Verifica se a página anterior está dentro dos limites
       getHeroesPage(previousPage);
       setCurrentPage(previousPage);
     }
@@ -54,6 +52,7 @@ export const HeroesPage = () => {
     }
     const total = Math.ceil(totalHeroes / perPageHeroes);
     setTotalPages(total);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, [heroes, getHeroes, totalHeroes, perPageHeroes]);
 
   return (
@@ -79,10 +78,22 @@ export const HeroesPage = () => {
           </ul>
           <div>
             <div>
-              <AiOutlineDoubleLeft onClick={goToFirstPage} size={32} />
-              <AiOutlineLeft onClick={goToPreviousPage} size={32} />
-              <AiOutlineRight onClick={goToNextPage} size={32} />
-              <AiOutlineDoubleRight onClick={goToLastPage} size={32} />
+              <AiOutlineDoubleLeft
+                onClick={goToFirstPage}
+                size={32}
+                color="white"
+              />
+              <AiOutlineLeft
+                onClick={goToPreviousPage}
+                size={32}
+                color="white"
+              />
+              <AiOutlineRight onClick={goToNextPage} size={32} color="white" />
+              <AiOutlineDoubleRight
+                onClick={goToLastPage}
+                size={32}
+                color="white"
+              />
             </div>
             <div>
               <h1>
