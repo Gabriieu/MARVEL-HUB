@@ -39,6 +39,8 @@ export const EventCardStyle = styled.li`
       color: white;
       background-color: var(--marvel-red);
       padding: 0.5rem;
+      align-self: self-start;
+      margin: .5rem;
 
       a {
         text-decoration: none;
@@ -50,6 +52,7 @@ export const EventCardStyle = styled.li`
     button {
       padding: 0.5rem;
       font-family: var(--font-marvel);
+      text-align: justify;
     }
   }
 `;

@@ -1,16 +1,19 @@
 import styled from "styled-components";
 
 export const HeroCardStyle = styled.li`
-  width: 200px;
-  height: 200px;
-  background-color: black;
-  padding: var(--padding-1);
+  width: 40vw;
+  min-height: 35vh;
+  background-color: rgba(0,0,0,.9);
   color: white;
-  border: 1px solid black;
+  border-bottom-right-radius: 10%;
 
   img {
     width: 100%;
-    height: 100%;
-    border: 2px solid red;
+    height: 60%;
+  }
+
+  div{
+    height: 40%;
+    padding: var(--padding-1);
   }
 `;

@@ -18,7 +18,7 @@ export const EventCarousel = ({ events }: iEventCarouselProp) => {
       } else {
         setIndex(0);
       }
-    }, 4000);
+    }, 8000);
     return () => {
       clearInterval(intervalId);
     };
