@@ -9,6 +9,7 @@ export const HeaderStyle = styled.header`
   align-items: center;
   position: fixed;
   background-color: var(--grey--scale--grey-0);
+  z-index: 1;
 
   img {
     width: 62px;
@@ -39,6 +40,7 @@ export const ContainerMobile = styled.div`
   width: 100%;
   height: 100%;
   font-size: 32px;
+  z-index: 2;
 
   ul {
     margin-top: 2rem;

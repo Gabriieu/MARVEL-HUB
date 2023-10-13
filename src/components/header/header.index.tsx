@@ -19,7 +19,11 @@ export const Header = () => {
     <>
       <HeaderStyle>
         <div id="hamb-menu" onClick={() => setDisplayMenu(!displayMenu)}>
-          {displayMenu ? <TfiClose size={32} color="white"/> : <TfiMenu size={32} color="white"/>}
+          {displayMenu ? (
+            <TfiClose size={32} color="white" />
+          ) : (
+            <TfiMenu size={32} color="white" />
+          )}
         </div>
         <ContainerDesktop>
           <nav>
@@ -27,23 +31,23 @@ export const Header = () => {
               <li onClick={() => closeAndNavigate("/")}>
                 <h1>HOME</h1>
               </li>
-              <li onClick={() => closeAndNavigate("/eventos")}>
-                <h1>HERÓIS</h1>
+              <li onClick={() => closeAndNavigate("/heros")}>
+                <h1>HEROS</h1>
               </li>
-              <li onClick={() => closeAndNavigate("/quadrinhos")}>
-                <h1>QUADRINHOS</h1>
+              <li onClick={() => closeAndNavigate("/comics")}>
+                <h1>COMICS</h1>
               </li>
               <li onClick={() => closeAndNavigate("/series")}>
-                <h1>SÉRIES</h1>
+                <h1>SERIES</h1>
               </li>
-              <li onClick={() => closeAndNavigate("/historias")}>
-                <h1>HISTÓRIAS</h1>
+              <li onClick={() => closeAndNavigate("/stories")}>
+                <h1>STORIES</h1>
               </li>
-              <li onClick={() => closeAndNavigate("/criadores")}>
-                <h1>CRIADORES</h1>
+              <li onClick={() => closeAndNavigate("/creators")}>
+                <h1>CREATORS</h1>
               </li>
-              <li onClick={() => closeAndNavigate("/sobre")}>
-                <h1>SOBRE</h1>
+              <li onClick={() => closeAndNavigate("/about")}>
+                <h1>ABOUT</h1>
               </li>
             </ul>
           </nav>
@@ -60,28 +64,28 @@ export const Header = () => {
                 <h1>HOME</h1>
                 <MdOutlineNavigateNext />
               </li>
-              <li onClick={() => closeAndNavigate("/eventos")}>
-                <h1>HERÓIS</h1>
+              <li onClick={() => closeAndNavigate("/heroes")}>
+                <h1>HEROES</h1>
                 <MdOutlineNavigateNext />
               </li>
-              <li onClick={() => closeAndNavigate("/quadrinhos")}>
-                <h1>QUADRINHOS</h1>
+              <li onClick={() => closeAndNavigate("/comics")}>
+                <h1>COMICS</h1>
                 <MdOutlineNavigateNext />
               </li>
               <li onClick={() => closeAndNavigate("/series")}>
-                <h1>SÉRIES</h1>
+                <h1>SERIES</h1>
                 <MdOutlineNavigateNext />
               </li>
-              <li onClick={() => closeAndNavigate("/historias")}>
-                <h1>HISTÓRIAS</h1>
+              <li onClick={() => closeAndNavigate("/stories")}>
+                <h1>STORIES</h1>
                 <MdOutlineNavigateNext />
               </li>
-              <li onClick={() => closeAndNavigate("/criadores")}>
-                <h1>CRIADORES</h1>
+              <li onClick={() => closeAndNavigate("/creators")}>
+                <h1>CREATORS</h1>
                 <MdOutlineNavigateNext />
               </li>
-              <li onClick={() => closeAndNavigate("/sobre")}>
-                <h1>SOBRE</h1>
+              <li onClick={() => closeAndNavigate("/about")}>
+                <h1>ABOUT</h1>
                 <MdOutlineNavigateNext />
               </li>
             </ul>

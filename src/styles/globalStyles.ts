@@ -46,6 +46,8 @@ export const GlobalStyle = createGlobalStyle`
         --padding-2: 2rem;
 
         --border-1: 8px;
+
+        --font-marvel: "Marvel";
         
         & ::-webkit-scrollbar{
             display: none;

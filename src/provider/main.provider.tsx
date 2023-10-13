@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { iHero } from "./types/@types-hero";
 import { hashKey } from "../services/api/hash";
 import { iEvent } from "./types/@types-event";
+import axios, { AxiosError, isAxiosError } from "axios";
 
 interface iMainProviderProps {
   children: React.ReactNode;
@@ -24,23 +25,27 @@ export const MainProvider = ({ children }: iMainProviderProps) => {
   const [events, setEvents] = useState<iEvent[] | []>([]);
 
   const getEvents = async () => {
-    if (events.length === 0) {
-      try {
-        const response = await api.get(`/events?limit=100${hash}`);
-        setEvents(response.data.data.results);
-      } catch (error) {
-        toast.error("erro");
+    try {
+      const response = await api.get(`/events?limit=5&orderBy=-startDate${hash}`);
+      setEvents(response.data.data.results);
+    } catch (error: any | AxiosError) {
+      if(axios.isAxiosError(error)){
+        toast.error(error.message);
+      }else{
+        console.log(error)
       }
     }
   };
 
   const getHeroes = async () => {
-    if (heroes.length === 0) {
-      try {
-        const response = await api.get(`/characters?limit=100${hash}`);
-        setHeroes(response.data.data.results);
-      } catch (error) {
-        toast.error("Erro");
+    try {
+      const response = await api.get(`/characters?limit=100${hash}`);
+      setHeroes(response.data.data.results);
+    } catch (error: any | AxiosError) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.message);
+      }else{
+        console.log(error)
       }
     }
   };
