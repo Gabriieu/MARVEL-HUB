@@ -14,12 +14,20 @@ import {
   AiOutlineRight,
   AiOutlineDoubleRight,
 } from "react-icons/ai";
-import { BsSearch } from "react-icons/bs";
+import { FcSearch } from "react-icons/fc";
 import { Footer } from "../../components/footer/footer.index";
 
 export const HeroesPage = () => {
-  const { getHeroes, heroes, getHeroesPage, perPageHeroes, totalHeroes } =
-    useContext(MainContext);
+  const {
+    getHeroes,
+    heroes,
+    getHeroesPage,
+    perPageHeroes,
+    totalHeroes,
+    heroesByName,
+    getHeroesByName,
+    setHeroesByName,
+  } = useContext(MainContext);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(0);
 
@@ -46,6 +54,22 @@ export const HeroesPage = () => {
     }
   };
 
+  const getHeroByInput = async () => {
+    const input = document.getElementById(
+      "input-search-bar"
+    ) as HTMLInputElement;
+    getHeroesByName(input.value);
+  };
+
+  const handleInputClear = () => {
+    const input = document.getElementById(
+      "input-search-bar"
+    ) as HTMLInputElement;
+
+    if (input.value.length < 1) {
+      setHeroesByName([]);
+    }
+  };
   useEffect(() => {
     if (heroes.length === 0) {
       toast.promise(getHeroes(), {
@@ -73,63 +97,78 @@ export const HeroesPage = () => {
         <ContainerBottomSection>
           <div className="characters-title">
             <h1>CHARACTERS</h1>
-
             <div id="search-bar">
+              <input
+                type="text"
+                placeholder="Explore Marvel..."
+                name=""
+                id="input-search-bar"
+                onChange={handleInputClear}
+              />
               <div>
-                <BsSearch />
+                <FcSearch
+                  onClick={getHeroByInput}
+                  id="search-button"
+                  size={50}
+                />
               </div>
-              <input type="text" placeholder="SEARCH" name="" id="" />
             </div>
           </div>
           <ul>
-            {heroes &&
-              heroes.map((hero) => <HeroCard hero={hero} key={hero.id} />)}
+            {heroesByName.length > 0
+              ? heroesByName.map((hero) => (
+                  <HeroCard hero={hero} key={hero.id} />
+                ))
+              : heroes &&
+                heroes.map((hero) => <HeroCard hero={hero} key={hero.id} />)}
           </ul>
-          <div className="pagination">
-            <div>
-              {currentPage !== 0 ? (
-                <AiOutlineDoubleLeft
-                  onClick={goToFirstPage}
-                  size={32}
-                  color="white"
-                />
-              ) : (
-                <AiOutlineDoubleLeft size={32} color="grey" />
-              )}
-              {currentPage > 0 ? (
-                <AiOutlineLeft
-                  onClick={goToPreviousPage}
-                  size={32}
-                  color="white"
-                />
-              ) : (
-                <AiOutlineLeft size={32} color="grey" />
-              )}
-              {currentPage < totalPages - 1 ? (
-                <AiOutlineRight
-                  onClick={goToNextPage}
-                  size={32}
-                  color="white"
-                />
-              ) : (
-                <AiOutlineRight size={32} color="grey" />
-              )}
-              {currentPage !== totalPages - 1 ? (
-                <AiOutlineDoubleRight
-                  onClick={goToLastPage}
-                  size={32}
-                  color="white"
-                />
-              ) : (
-                <AiOutlineDoubleRight size={32} color="grey" />
-              )}
+          {heroesByName.length === 0 && (
+            <div className="pagination">
+              <div>
+                {currentPage !== 0 ? (
+                  <AiOutlineDoubleLeft
+                    onClick={goToFirstPage}
+                    size={32}
+                    color="white"
+                  />
+                ) : (
+                  <AiOutlineDoubleLeft size={32} color="grey" />
+                )}
+                {currentPage > 0 ? (
+                  <AiOutlineLeft
+                    onClick={goToPreviousPage}
+                    size={32}
+                    color="white"
+                  />
+                ) : (
+                  <AiOutlineLeft size={32} color="grey" />
+                )}
+                {currentPage < totalPages - 1 ? (
+                  <AiOutlineRight
+                    onClick={goToNextPage}
+                    size={32}
+                    color="white"
+                  />
+                ) : (
+                  <AiOutlineRight size={32} color="grey" />
+                )}
+                {currentPage !== totalPages - 1 ? (
+                  <AiOutlineDoubleRight
+                    onClick={goToLastPage}
+                    size={32}
+                    color="white"
+                  />
+                ) : (
+                  <AiOutlineDoubleRight size={32} color="grey" />
+                )}
+              </div>
+              <div>
+                <h1>
+                  {currentPage + 1} of {totalPages}
+                </h1>
+              </div>
             </div>
-            <div>
-              <h1>
-                {currentPage + 1} of {totalPages}
-              </h1>
-            </div>
-          </div>
+          )}
         </ContainerBottomSection>
       </HeroPageStyle>
       <Footer />

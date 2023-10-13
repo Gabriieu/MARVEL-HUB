@@ -83,6 +83,7 @@ export const ContainerBottomSection = styled.section`
     flex-direction: row;
     align-items: center;
     height: 40px;
+    position: relative;
 
     input {
       padding: 0.5rem;
@@ -90,12 +91,14 @@ export const ContainerBottomSection = styled.section`
     }
 
     div {
-      background-color: white;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      padding: 0.5rem;
+      padding: 0;
+      border-radius: 50%;
     }
+
+    /* #search-button{
+      position: absolute;
+      right: 0;
+    } */
   }
   ul {
     width: 100%;
