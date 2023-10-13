@@ -14,6 +14,7 @@ import {
   AiOutlineRight,
   AiOutlineDoubleRight,
 } from "react-icons/ai";
+import { BsSearch } from "react-icons/bs";
 import { Footer } from "../../components/footer/footer.index";
 
 export const HeroesPage = () => {
@@ -72,11 +73,17 @@ export const HeroesPage = () => {
         <ContainerBottomSection>
           <div className="characters-title">
             <h1>CHARACTERS</h1>
+
+            <div id="search-bar">
+              <div>
+                <BsSearch />
+              </div>
+              <input type="text" placeholder="SEARCH" name="" id="" />
+            </div>
           </div>
           <ul>
             {heroes &&
-              heroes.map((hero) => <HeroCard hero={hero} key={hero.id} />)
-            }
+              heroes.map((hero) => <HeroCard hero={hero} key={hero.id} />)}
           </ul>
           <div className="pagination">
             <div>
@@ -125,7 +132,7 @@ export const HeroesPage = () => {
           </div>
         </ContainerBottomSection>
       </HeroPageStyle>
-      <Footer/>
+      <Footer />
     </>
   );
 };

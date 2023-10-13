@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import backgroundImage from "../../assets/background-image.jpg";
-import backgroundImage2 from "../../assets/background-image-2.png"
+import backgroundImage2 from "../../assets/background-image-2.png";
 
 export const HeroPageStyle = styled.main`
   padding-top: 75px;
@@ -33,8 +33,6 @@ export const ContainerTopSection = styled.section`
     gap: 2rem;
     color: white;
 
-
-
     h1 {
       font-family: var(--font-marvel);
       font-size: 2rem;
@@ -44,11 +42,10 @@ export const ContainerTopSection = styled.section`
     p {
       font-size: 1.5rem;
       text-align: center;
-      text-shadow: 0.5px 0 black, -0.5px 0 black,
-        0 0.5px black, 0 -0.5px black,
-        0.5px 0.5px black, -0.5px -0.5px black,
-        0.5px -0.5px black, -0.5px 0.5px black;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-shadow: 0.5px 0 black, -0.5px 0 black, 0 0.5px black, 0 -0.5px black,
+        0.5px 0.5px black, -0.5px -0.5px black, 0.5px -0.5px black,
+        -0.5px 0.5px black;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     }
   }
 `;
@@ -64,6 +61,7 @@ export const ContainerBottomSection = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
     background-color: black;
     border-radius: 0 0 20% 20%;
     margin-bottom: 1rem;
@@ -80,6 +78,25 @@ export const ContainerBottomSection = styled.section`
     }
   }
 
+  #search-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 40px;
+
+    input {
+      padding: 0.5rem;
+      height: 100%;
+    }
+
+    div {
+      background-color: white;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding: 0.5rem;
+    }
+  }
   ul {
     width: 100%;
     display: flex;
@@ -89,7 +106,7 @@ export const ContainerBottomSection = styled.section`
     margin-bottom: 1rem;
   }
 
-  .pagination{
+  .pagination {
     background-color: rgba(0, 0, 0, 0.9);
     width: 100%;
     padding: 2rem;
@@ -97,7 +114,7 @@ export const ContainerBottomSection = styled.section`
     flex-direction: column;
     align-items: center;
 
-    svg:hover{
+    svg:hover {
       cursor: pointer;
     }
 
@@ -107,5 +124,4 @@ export const ContainerBottomSection = styled.section`
       font-size: 2rem;
     }
   }
-
 `;
