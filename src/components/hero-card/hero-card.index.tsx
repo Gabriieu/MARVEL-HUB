@@ -12,7 +12,7 @@ export const HeroCard = ({ hero }: iHeroCardProp) => {
         alt={hero.name}
       />
       <div>
-        <h1>{hero.name}</h1>
+        <h1>{hero.name.toUpperCase()}</h1>
       </div>
     </HeroCardStyle>
   );

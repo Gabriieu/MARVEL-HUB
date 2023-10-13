@@ -1,8 +1,15 @@
 import styled from "styled-components";
 import backgroundImage from "../../assets/background-image.jpg";
+import backgroundImage2 from "../../assets/background-image-2.png"
 
 export const HeroPageStyle = styled.main`
   padding-top: 75px;
+  background-image: url(${backgroundImage2});
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  box-shadow: inset 0px 0px 175px 175px rgba(0, 0, 0, 0.8);
 `;
 
 export const ContainerTopSection = styled.section`
@@ -26,23 +33,22 @@ export const ContainerTopSection = styled.section`
     gap: 2rem;
     color: white;
 
-    h1,
-    p {
-      font-family: var(--font-marvel);
-    }
+
 
     h1 {
+      font-family: var(--font-marvel);
       font-size: 2rem;
-      text-shadow: 1px 2px var(--marvel-red);
+      text-shadow: 1px 2px black;
     }
 
     p {
       font-size: 1.5rem;
       text-align: center;
-      text-shadow: 0.5px 0 var(--marvel-red), -0.5px 0 var(--marvel-red),
-        0 0.5px var(--marvel-red), 0 -0.5px var(--marvel-red),
-        0.5px 0.5px var(--marvel-red), -0.5px -0.5px var(--marvel-red),
-        0.5px -0.5px var(--marvel-red), -0.5px 0.5px var(--marvel-red);
+      text-shadow: 0.5px 0 black, -0.5px 0 black,
+        0 0.5px black, 0 -0.5px black,
+        0.5px 0.5px black, -0.5px -0.5px black,
+        0.5px -0.5px black, -0.5px 0.5px black;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
   }
 `;
@@ -52,21 +58,22 @@ export const ContainerBottomSection = styled.section`
   flex-direction: column;
   align-items: center;
 
-  > div {
+  .characters-title {
     padding: var(--padding-1);
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-      background-color: rgba(0,0,0,.9);
-      border-radius: 0 0 20% 20%;
-      margin-bottom: 1rem;
+    background-color: black;
+    border-radius: 0 0 20% 20%;
+    margin-bottom: 1rem;
 
     h1 {
       font-family: var(--font-marvel);
       color: white;
       font-size: 3rem;
-      text-shadow: 2px 2px var(--marvel-red);      text-shadow: 0.5px 0 var(--marvel-red), -0.5px 0 var(--marvel-red),
+      text-shadow: 2px 2px var(--marvel-red);
+      text-shadow: 0.5px 0 var(--marvel-red), -0.5px 0 var(--marvel-red),
         0 0.5px var(--marvel-red), 0 -0.5px var(--marvel-red),
         0.5px 0.5px var(--marvel-red), -0.5px -0.5px var(--marvel-red),
         0.5px -0.5px var(--marvel-red), -0.5px 0.5px var(--marvel-red);
@@ -79,5 +86,26 @@ export const ContainerBottomSection = styled.section`
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
+    margin-bottom: 1rem;
   }
+
+  .pagination{
+    background-color: rgba(0, 0, 0, 0.9);
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    svg:hover{
+      cursor: pointer;
+    }
+
+    h1 {
+      font-family: var(--font-marvel);
+      color: white;
+      font-size: 2rem;
+    }
+  }
+
 `;

@@ -14,6 +14,7 @@ import {
   AiOutlineRight,
   AiOutlineDoubleRight,
 } from "react-icons/ai";
+import { Footer } from "../../components/footer/footer.index";
 
 export const HeroesPage = () => {
   const { getHeroes, heroes, getHeroesPage, perPageHeroes, totalHeroes } =
@@ -69,31 +70,52 @@ export const HeroesPage = () => {
           </div>
         </ContainerTopSection>
         <ContainerBottomSection>
-          <div>
-            <h1 onClick={() => getHeroesPage(0)}>CHARACTERS</h1>
+          <div className="characters-title">
+            <h1>CHARACTERS</h1>
           </div>
           <ul>
             {heroes &&
-              heroes.map((hero) => <HeroCard hero={hero} key={hero.id} />)}
+              heroes.map((hero) => <HeroCard hero={hero} key={hero.id} />)
+            }
           </ul>
-          <div>
+          <div className="pagination">
             <div>
-              <AiOutlineDoubleLeft
-                onClick={goToFirstPage}
-                size={32}
-                color="white"
-              />
-              <AiOutlineLeft
-                onClick={goToPreviousPage}
-                size={32}
-                color="white"
-              />
-              <AiOutlineRight onClick={goToNextPage} size={32} color="white" />
-              <AiOutlineDoubleRight
-                onClick={goToLastPage}
-                size={32}
-                color="white"
-              />
+              {currentPage !== 0 ? (
+                <AiOutlineDoubleLeft
+                  onClick={goToFirstPage}
+                  size={32}
+                  color="white"
+                />
+              ) : (
+                <AiOutlineDoubleLeft size={32} color="grey" />
+              )}
+              {currentPage > 0 ? (
+                <AiOutlineLeft
+                  onClick={goToPreviousPage}
+                  size={32}
+                  color="white"
+                />
+              ) : (
+                <AiOutlineLeft size={32} color="grey" />
+              )}
+              {currentPage < totalPages - 1 ? (
+                <AiOutlineRight
+                  onClick={goToNextPage}
+                  size={32}
+                  color="white"
+                />
+              ) : (
+                <AiOutlineRight size={32} color="grey" />
+              )}
+              {currentPage !== totalPages - 1 ? (
+                <AiOutlineDoubleRight
+                  onClick={goToLastPage}
+                  size={32}
+                  color="white"
+                />
+              ) : (
+                <AiOutlineDoubleRight size={32} color="grey" />
+              )}
             </div>
             <div>
               <h1>
@@ -103,6 +125,7 @@ export const HeroesPage = () => {
           </div>
         </ContainerBottomSection>
       </HeroPageStyle>
+      <Footer/>
     </>
   );
 };

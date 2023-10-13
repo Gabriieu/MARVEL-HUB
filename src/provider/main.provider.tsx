@@ -24,7 +24,7 @@ export const MainContext = createContext({} as iMainContext);
 
 export const MainProvider = ({ children }: iMainProviderProps) => {
   const hash = hashKey();
-  const [perPageHeroes, setPerPageHeroes] = useState<number>(20)
+  const perPageHeroes: number = 24
   const [totalHeroes, setTotalHeroes] = useState<number>(0)
   const [heroes, setHeroes] = useState<iHero[] | []>([]);
   const [events, setEvents] = useState<iEvent[] | []>([]);
@@ -47,7 +47,6 @@ export const MainProvider = ({ children }: iMainProviderProps) => {
       const response = await api.get(`/characters?limit=${perPageHeroes}${hash}`);
       setHeroes(response.data.data.results);
       setTotalHeroes(response.data.data.total)
-      console.log(response.data.data.results)
     } catch (error: any | AxiosError) {
       if (axios.isAxiosError(error)) {
         toast.error(error.message);

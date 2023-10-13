@@ -4,6 +4,7 @@ import { MainContext } from "../../provider/main.provider";
 import { toast } from "react-toastify";
 import { MainStyle } from "./home-page.style";
 import { EventCarousel } from "../../components/event-carousel/event-carousel.index";
+import { Footer } from "../../components/footer/footer.index";
 
 export const HomePage = () => {
   const { getEvents, events } = useContext(MainContext);
@@ -23,6 +24,7 @@ export const HomePage = () => {
       <MainStyle>
           <EventCarousel events={events}/>
       </MainStyle>
+      <Footer/>
     </>
   );
 };
