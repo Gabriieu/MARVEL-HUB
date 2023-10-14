@@ -26,26 +26,32 @@ export const HeroesPage = () => {
     heroesByName,
     getHeroesByName,
     setHeroesByName,
+    currentPage,
+    setCurrentPage,
+    totalPages,
+    setTotalPages,
   } = useContext(MainContext);
-  const [totalPages, setTotalPages] = useState<number>(0);
-  const [currentPage, setCurrentPage] = useState<number>(0);
 
   const goToFirstPage = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     getHeroesPage(0);
     setCurrentPage(0);
   };
 
   const goToLastPage = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     getHeroesPage(totalPages - 1);
     setCurrentPage(totalPages - 1);
   };
 
   const goToNextPage = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     getHeroesPage(currentPage + 1);
     setCurrentPage(currentPage + 1);
   };
 
   const goToPreviousPage = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     const previousPage = currentPage - 1;
     if (previousPage >= 0) {
       getHeroesPage(previousPage);
@@ -69,6 +75,7 @@ export const HeroesPage = () => {
       setHeroesByName([]);
     }
   };
+
   useEffect(() => {
     if (heroes.length === 0) {
       toast.promise(getHeroes(), {
@@ -107,7 +114,10 @@ export const HeroesPage = () => {
               />
             </div>
             {heroesByName.length > 0 && (
-              <div id="results-length">Results found: {heroesByName.length}</div>
+              <div id="results-length">
+                Results found: {heroesByName.length}
+                <h2 onClick={() => setHeroesByName([])}>Clear</h2>
+              </div>
             )}
           </div>
           <ul>

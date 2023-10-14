@@ -21,6 +21,10 @@ interface iMainContext {
   heroesByName: [] | iHero[];
   getHeroesByName: (name: string) => Promise<void>;
   setHeroesByName: React.Dispatch<React.SetStateAction<[] | iHero[]>>;
+  totalPages: number;
+  setTotalPages: React.Dispatch<React.SetStateAction<number>>;
+  currentPage: number;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const MainContext = createContext({} as iMainContext);
@@ -32,6 +36,8 @@ export const MainProvider = ({ children }: iMainProviderProps) => {
   const [heroes, setHeroes] = useState<iHero[] | []>([]);
   const [events, setEvents] = useState<iEvent[] | []>([]);
   const [heroesByName, setHeroesByName] = useState<iHero[] | []>([]);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(0);
 
   const getEvents = async () => {
     try {
@@ -82,7 +88,7 @@ export const MainProvider = ({ children }: iMainProviderProps) => {
   };
 
   const getHeroesByName = async (name: string) => {
-    if(name.length > 3){
+    if (name.length > 3) {
       try {
         const response = await api.get(
           `/characters?nameStartsWith=${name}&limit=${perPageHeroes}${hash}`
@@ -111,6 +117,10 @@ export const MainProvider = ({ children }: iMainProviderProps) => {
         heroesByName,
         getHeroesByName,
         setHeroesByName,
+        currentPage,
+        setCurrentPage,
+        totalPages,
+        setTotalPages,
       }}
     >
       {children}

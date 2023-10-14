@@ -88,6 +88,7 @@ export const ContainerBottomSection = styled.section`
     input {
       padding: 0.5rem;
       height: 100%;
+      border-radius: 16px;
     }
 
     div {
@@ -100,6 +101,19 @@ export const ContainerBottomSection = styled.section`
     color: white;
     font-family: var(--font-marvel);
     font-size: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+    h2{
+      padding-left: 1rem;
+      font-family: var(--font-marvel);
+      text-decoration: underline;
+      
+      &:hover{
+        cursor: pointer;
+      }
+    }
   }
   ul {
     width: 100%;
