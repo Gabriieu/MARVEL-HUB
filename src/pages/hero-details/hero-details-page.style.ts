@@ -19,7 +19,6 @@ export const HeroDetailsSectionPageStyle = styled.section`
   }
 
   #character-description {
-    height: 20vh;
     width: 100vw;
     background-color: black;
     color: white;
@@ -33,6 +32,44 @@ export const HeroDetailsSectionPageStyle = styled.section`
     p {
       font-size: 1.5rem;
       font-family: var(--font-marvel);
+      padding-bottom: 2rem;
+    }
+
+    @media (min-width: 1024px) {
+      height: 100%;
+    }
+  }
+
+  #character-latest-comics {
+    width: 100%;
+    background-color: white;
+    padding: 1rem;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    gap: 1rem;
+    h1 {
+      font-family: var(--font-marvel);
+      font-size: 2rem;
+    }
+    ul{
+        display: flex;
+        flex-direction: row;
+        overflow: scroll;
+        gap: 2rem;
+        max-width: 100%;
+    }
+
+    #see-all-comics{
+        background-color: var(--marvel-red);
+        padding: .5rem;
+        border-radius: 8px;
+        color: white;
+        font-size: unset;
+        &:hover{
+            cursor: pointer;
+            transform: scale(1.1);
+        }
     }
   }
 
@@ -44,5 +81,7 @@ export const HeroDetailsSectionPageStyle = styled.section`
 
   @media (min-width: 1024px) {
     flex-direction: row;
+    padding-bottom: 2rem;
+    border-bottom: 5px solid black;
   }
 `;

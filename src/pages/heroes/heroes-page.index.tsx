@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { MainContext } from "../../provider/main.provider";
 import { HeroCard } from "../../components/hero-card/hero-card.index";
 import { Header } from "../../components/header/header.index";

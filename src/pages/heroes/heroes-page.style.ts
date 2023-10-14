@@ -3,6 +3,7 @@ import backgroundImage from "../../assets/background-image.jpg";
 import backgroundImage2 from "../../assets/background-image-2.png";
 
 export const HeroPageStyle = styled.main`
+  width: 100vw;
   padding-top: 75px;
   background-image: url(${backgroundImage2});
   background-repeat: no-repeat;
@@ -97,7 +98,7 @@ export const ContainerBottomSection = styled.section`
     }
   }
 
-  #results-length{
+  #results-length {
     color: white;
     font-family: var(--font-marvel);
     font-size: 1.5rem;
@@ -105,12 +106,12 @@ export const ContainerBottomSection = styled.section`
     flex-direction: row;
     justify-content: space-evenly;
 
-    h2{
+    h2 {
       padding-left: 1rem;
       font-family: var(--font-marvel);
       text-decoration: underline;
-      
-      &:hover{
+
+      &:hover {
         cursor: pointer;
       }
     }
