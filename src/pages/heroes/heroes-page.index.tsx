@@ -14,7 +14,6 @@ import {
   AiOutlineRight,
   AiOutlineDoubleRight,
 } from "react-icons/ai";
-import { FcSearch } from "react-icons/fc";
 import { Footer } from "../../components/footer/footer.index";
 
 export const HeroesPage = () => {
@@ -73,13 +72,13 @@ export const HeroesPage = () => {
   useEffect(() => {
     if (heroes.length === 0) {
       toast.promise(getHeroes(), {
-        pending: "Obtendo heróis...",
+        pending: "Gathering characters...",
       });
     }
     const total = Math.ceil(totalHeroes / perPageHeroes);
     setTotalPages(total);
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  }, [heroes, getHeroes, totalHeroes, perPageHeroes]);
+  }, [heroes, getHeroes, totalHeroes, perPageHeroes, heroesByName]);
 
   return (
     <>
@@ -104,15 +103,12 @@ export const HeroesPage = () => {
                 name=""
                 id="input-search-bar"
                 onChange={handleInputClear}
+                onChangeCapture={getHeroByInput}
               />
-              <div>
-                <FcSearch
-                  onClick={getHeroByInput}
-                  id="search-button"
-                  size={50}
-                />
-              </div>
             </div>
+            {heroesByName.length > 0 && (
+              <div id="results-length">Results found: {heroesByName.length}</div>
+            )}
           </div>
           <ul>
             {heroesByName.length > 0

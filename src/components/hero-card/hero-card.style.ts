@@ -10,6 +10,7 @@ export const HeroCardStyle = styled.li`
   img {
     width: 100%;
     height: 60%;
+    border-bottom: 2px solid var(--marvel-red);
   }
 
   div {

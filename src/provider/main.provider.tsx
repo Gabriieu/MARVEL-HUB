@@ -82,21 +82,22 @@ export const MainProvider = ({ children }: iMainProviderProps) => {
   };
 
   const getHeroesByName = async (name: string) => {
-    try {
-      const response = await api.get(
-        `/characters?name=${name}&limit=${perPageHeroes}${hash}`
-      );
-      setHeroesByName(response.data.data.results);
-      console.log(name);
-      console.log(response.data.data.results);
-    } catch (error: any | AxiosError) {
-      if (axios.isAxiosError(error)) {
-        toast.error(error.message);
-      } else {
-        console.log(error);
+    if(name.length > 3){
+      try {
+        const response = await api.get(
+          `/characters?nameStartsWith=${name}&limit=${perPageHeroes}${hash}`
+        );
+        setHeroesByName(response.data.data.results);
+      } catch (error: any | AxiosError) {
+        if (axios.isAxiosError(error)) {
+          toast.error(error.message);
+        } else {
+          console.log(error);
+        }
       }
     }
   };
+
   return (
     <MainContext.Provider
       value={{

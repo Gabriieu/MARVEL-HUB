@@ -94,11 +94,12 @@ export const ContainerBottomSection = styled.section`
       padding: 0;
       border-radius: 50%;
     }
+  }
 
-    /* #search-button{
-      position: absolute;
-      right: 0;
-    } */
+  #results-length{
+    color: white;
+    font-family: var(--font-marvel);
+    font-size: 1.5rem;
   }
   ul {
     width: 100%;
