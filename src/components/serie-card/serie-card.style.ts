@@ -1,17 +1,19 @@
 import styled from "styled-components";
 
-export const ComicCardStyle = styled.li`
+export const SerieCardStyle = styled.li`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   padding: 0.5rem;
   margin: 0.7rem;
   border-radius: 8px;
 
   img {
     width: 250px;
-    max-height: 350px;
+    max-height: 230px;
   }
+
   h2 {
     font-family: var(--font-marvel);
     text-align: center;
@@ -24,10 +26,8 @@ export const ComicCardStyle = styled.li`
   &:hover {
     cursor: pointer;
     box-shadow: 11px 11px 11px rgba(0, 0, 0, 0.5);
-    background-color: rgba(0, 0, 0, 0.9);
-    color: white;
-    img{
-      border-bottom: 5px solid var(--marvel-red);
-    }
+    background-color: white;
+    color: black;
+
   }
 `;

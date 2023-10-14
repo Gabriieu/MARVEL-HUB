@@ -10,10 +10,8 @@ export const Footer = () => {
         <img src={marvelM} alt="MARVEL" />
         <p>
           Este site não possui vínculos com a Marvel e não é endossado,
-          patrocinado ou afiliado de nenhuma forma pela Marvel Entertainment,
-          LLC. Todos os personagens, logotipos e outros materiais relacionados à
-          Marvel são marcas registradas e propriedade da Marvel Entertainment,
-          LLC. Todos os direitos autorais e marcas registradas são utilizados
+          patrocinado ou afiliado de nenhuma forma pela Marvel Entertainment. Todos os personagens, logotipos e outros materiais relacionados à
+          Marvel são marcas registradas e propriedade da Marvel Entertainment. Todos os direitos autorais e marcas registradas são utilizados
           aqui apenas para fins informativos e não comerciais.
         </p>
       </section>

@@ -10,7 +10,7 @@ export const ComicCard = ({ comic }: iComicCardProp) => {
       <div>
         <img
           src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`}
-          alt="Comic"
+          alt={comic.title}
         />
       </div>
       <div>
