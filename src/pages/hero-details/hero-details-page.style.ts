@@ -1,20 +1,21 @@
 import styled from "styled-components";
-import characterBackground from "../../assets/character-background.jpg";
+import characterBackground from "../../assets/character-background.avif";
 
 export const HeroDetailsSectionPageStyle = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-image: url(${characterBackground});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  box-shadow: inset 0px 0px 175px 175px rgba(0, 0, 0, 0.6);
 
   #character-image {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url(${characterBackground});
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    box-shadow: inset 0px 0px 175px 175px rgba(0, 0, 0, 0.6);
+    width: 100%;
   }
 
   #character-description {
@@ -39,5 +40,9 @@ export const HeroDetailsSectionPageStyle = styled.section`
     height: 40vh;
     max-width: 100%;
     border: 2px solid var(--marvel-red);
+  }
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
   }
 `;
