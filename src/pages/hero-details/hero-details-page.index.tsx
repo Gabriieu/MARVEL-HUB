@@ -33,6 +33,8 @@ export const HeroDetailsPage = () => {
   const [characterRecentSeries, setCharacterRecentSeries] = useState<
     iSerie[] | []
   >([]);
+  const [displayComicButton, setDisplayComicButton] = useState<boolean>(true);
+  const [displaySerieButton, setDisplaySerieButton] = useState<boolean>(true);
 
   const getHeroById = async (characterId: number) => {
     try {
@@ -62,6 +64,22 @@ export const HeroDetailsPage = () => {
     }
   };
 
+  const getAllHeroComics = async (characterId: number) => {
+    try {
+      const response = await api.get(
+        `/characters/${characterId}/comics?${hash}`
+      );
+      setCharacterRecentComics(response.data.data.results);
+      setDisplayComicButton(false);
+    } catch (error: any | AxiosError) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.message);
+      } else {
+        console.log(error);
+      }
+    }
+  };
+
   const getHeroSeries = async (characterId: number) => {
     try {
       const response = await api.get(
@@ -76,6 +94,23 @@ export const HeroDetailsPage = () => {
       }
     }
   };
+
+  const getAllHeroSeries = async (characterId: number) => {
+    try {
+      const response = await api.get(
+        `/characters/${characterId}/series?${hash}`
+      );
+      setCharacterRecentSeries(response.data.data.results);
+      setDisplaySerieButton(false);
+    } catch (error: any | AxiosError) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.message);
+      } else {
+        console.log(error);
+      }
+    }
+  };
+
   useEffect(() => {
     getHeroById(Number(characterId));
     getHeroComics(Number(characterId));
@@ -111,7 +146,7 @@ export const HeroDetailsPage = () => {
             </HeroDetailsSectionPageStyle>
             <HeroComicsSectionPageStyle>
               <div id="character-latest-comics">
-                <h1>{`${character.name}'s latest comics`.toUpperCase()}</h1>
+                <h1>{`${character.name}'s comics`.toUpperCase()}</h1>
                 {characterRecentComics.length === 0 ? (
                   <div id="empty">
                     <span>There are no comics</span>
@@ -124,21 +159,19 @@ export const HeroDetailsPage = () => {
                     ))}
                   </ul>
                 )}
-                {characterRecentComics.length > quantity - 1 && (
+                {displayComicButton && (
                   <h1
                     id="see-all-comics"
-                    onClick={() =>
-                      navigate(`/characters/${characterId}/comics`)
-                    }
+                    onClick={() => getAllHeroComics(character.id)}
                   >
-                    See all comics
+                    Show all comics
                   </h1>
                 )}
               </div>
             </HeroComicsSectionPageStyle>
             <HeroSeriesSectionPageStyle>
               <div id="character-latest-series">
-                <h1>{`${character.name} latest series`.toUpperCase()}</h1>
+                <h1>{`${character.name} series`.toUpperCase()}</h1>
                 {characterRecentSeries.length === 0 ? (
                   <div id="empty">
                     <span>There are no series</span>
@@ -151,14 +184,12 @@ export const HeroDetailsPage = () => {
                     ))}
                   </ul>
                 )}
-                {characterRecentSeries.length > quantity  - 1&& (
+                {displaySerieButton && (
                   <h1
                     id="see-all-series"
-                    onClick={() =>
-                      navigate(`/characters/${characterId}/series`)
-                    }
+                    onClick={() => getAllHeroSeries(character.id)}
                   >
-                    See all series
+                    Show all series
                   </h1>
                 )}
               </div>

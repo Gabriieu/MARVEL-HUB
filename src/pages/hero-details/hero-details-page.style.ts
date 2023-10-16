@@ -64,13 +64,10 @@ export const HeroDetailsSectionPageStyle = styled.section`
 `;
 
 export const HeroComicsSectionPageStyle = styled.section`
- /*  padding-top: 75px;
-  height: 65vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
- */
+
   #character-latest-comics {
     width: 100%;
     background-color: white;
@@ -109,26 +106,32 @@ export const HeroComicsSectionPageStyle = styled.section`
     }
   }
 
-  
-  #empty{
+  #empty {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    span{
+    
+    span {
       font-family: var(--font-marvel);
       font-size: 1.5rem;
       color: var(--marvel-red);
     }
-    img{
+    img {
       width: 100%;
       max-width: 400px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    ul {
+      flex-wrap: wrap;
+      justify-content: center;
     }
   }
 `;
 
 export const HeroSeriesSectionPageStyle = styled.section`
-
   background-color: black;
 
   #character-latest-series {
@@ -170,19 +173,25 @@ export const HeroSeriesSectionPageStyle = styled.section`
     }
   }
 
-  #empty{
+  #empty {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    span{
+    span {
       font-family: var(--font-marvel);
       font-size: 1.5rem;
       color: var(--marvel-red);
     }
-    img{
+    img {
       width: 100%;
       max-width: 400px;
+    }
+  }
+  @media (min-width: 1024px) {
+    ul {
+      flex-wrap: wrap;
+      justify-content: center;
     }
   }
 `;

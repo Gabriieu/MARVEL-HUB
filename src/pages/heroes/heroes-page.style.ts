@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import backgroundImage from "../../assets/background-image.jpg";
-import backgroundImage2 from "../../assets/background-image-2.png";
+import backgroundImage2 from "../../assets/background-image-2.jpg";
 
 export const HeroPageStyle = styled.main`
   width: 100vw;
@@ -10,7 +10,7 @@ export const HeroPageStyle = styled.main`
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
-  box-shadow: inset 0px 0px 175px 175px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 100vw 0 0 0 rgba(0, 0, 0, 0.8);
 `;
 
 export const ContainerTopSection = styled.section`
