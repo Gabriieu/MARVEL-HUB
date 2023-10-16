@@ -40,12 +40,6 @@ export const Header = () => {
               <li onClick={() => closeAndNavigate("/series")}>
                 <h1>SERIES</h1>
               </li>
-              <li onClick={() => closeAndNavigate("/stories")}>
-                <h1>STORIES</h1>
-              </li>
-              <li onClick={() => closeAndNavigate("/creators")}>
-                <h1>CREATORS</h1>
-              </li>
               <li onClick={() => closeAndNavigate("/about")}>
                 <h1>ABOUT</h1>
               </li>
@@ -74,14 +68,6 @@ export const Header = () => {
               </li>
               <li onClick={() => closeAndNavigate("/series")}>
                 <h1>SERIES</h1>
-                <MdOutlineNavigateNext />
-              </li>
-              <li onClick={() => closeAndNavigate("/stories")}>
-                <h1>STORIES</h1>
-                <MdOutlineNavigateNext />
-              </li>
-              <li onClick={() => closeAndNavigate("/creators")}>
-                <h1>CREATORS</h1>
                 <MdOutlineNavigateNext />
               </li>
               <li onClick={() => closeAndNavigate("/about")}>

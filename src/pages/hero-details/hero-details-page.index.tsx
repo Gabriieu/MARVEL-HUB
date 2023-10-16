@@ -68,7 +68,6 @@ export const HeroDetailsPage = () => {
         `/characters/${characterId}/series?orderBy=-startYear&limit=${quantity}${hash}`
       );
       setCharacterRecentSeries(response.data.data.results);
-      console.log(response.data.data.results);
     } catch (error: any | AxiosError) {
       if (axios.isAxiosError(error)) {
         toast.error(error.message);
@@ -113,12 +112,19 @@ export const HeroDetailsPage = () => {
             <HeroComicsSectionPageStyle>
               <div id="character-latest-comics">
                 <h1>{`${character.name}'s latest comics`.toUpperCase()}</h1>
-                <ul>
-                  {characterRecentComics.map((comic) => (
-                    <ComicCard comic={comic} key={comic.id} />
-                  ))}
-                </ul>
-                {characterRecentComics.length > 0 ? (
+                {characterRecentComics.length === 0 ? (
+                  <div id="empty">
+                    <span>There are no comics</span>
+                    <img src={deadPoolChibi} alt="Not found" />
+                  </div>
+                ) : (
+                  <ul>
+                    {characterRecentComics.map((comic) => (
+                      <ComicCard comic={comic} key={comic.id} />
+                    ))}
+                  </ul>
+                )}
+                {characterRecentComics.length > quantity - 1 && (
                   <h1
                     id="see-all-comics"
                     onClick={() =>
@@ -127,37 +133,35 @@ export const HeroDetailsPage = () => {
                   >
                     See all comics
                   </h1>
-                ) : (
-                  <div id="empty">
-                    <span>There are no comics</span>
-                    <img src={deadPoolChibi} alt="Not found" />
-                  </div>
                 )}
               </div>
             </HeroComicsSectionPageStyle>
             <HeroSeriesSectionPageStyle>
               <div id="character-latest-series">
                 <h1>{`${character.name} latest series`.toUpperCase()}</h1>
-                <ul>
-                  {characterRecentSeries.map((serie) => (
-                    <SerieCard serie={serie} key={serie.id} />
-                  ))}
-                </ul>
-                {characterRecentSeries.length > 0 ? (
-                <h1
-                  id="see-all-series"
-                  onClick={() => navigate(`/characters/${characterId}/series`)}
-                >
-                  See all series
-                </h1>
-              ) : (
-                <div id="empty">
-                  <span>There are no series</span>
-                  <img src={thorChibi} alt="Not found" />
-                </div>
-              )}
+                {characterRecentSeries.length === 0 ? (
+                  <div id="empty">
+                    <span>There are no series</span>
+                    <img src={thorChibi} alt="Not found" />
+                  </div>
+                ) : (
+                  <ul>
+                    {characterRecentSeries.map((serie) => (
+                      <SerieCard serie={serie} key={serie.id} />
+                    ))}
+                  </ul>
+                )}
+                {characterRecentSeries.length > quantity  - 1&& (
+                  <h1
+                    id="see-all-series"
+                    onClick={() =>
+                      navigate(`/characters/${characterId}/series`)
+                    }
+                  >
+                    See all series
+                  </h1>
+                )}
               </div>
-              
             </HeroSeriesSectionPageStyle>
           </HeroDetailsMainStyle>
           <Footer />
