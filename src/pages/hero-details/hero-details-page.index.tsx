@@ -1,7 +1,7 @@
 import { Header } from "../../components/header/header.index";
 import { Footer } from "../../components/footer/footer.index";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { api } from "../../services/api/api";
 import { hashKey } from "../../services/api/hash";
 import { iHero } from "../../provider/types/@types-hero";
@@ -24,7 +24,6 @@ export const HeroDetailsPage = () => {
   const hash = hashKey();
   const { characterId } = useParams();
   const quantity: number = 6;
-  const navigate = useNavigate();
 
   const [character, setCharacter] = useState<iHero | null>(null);
   const [characterRecentComics, setCharacterRecentComics] = useState<

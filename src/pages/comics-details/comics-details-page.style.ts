@@ -36,7 +36,9 @@ export const Container = styled.section`
       text-align: justify;
     }
   }
-
+  #comic-details{
+    width: 100%;
+  }
   img {
     width: 100%;
   }
@@ -84,6 +86,14 @@ export const ContainerDetails = styled.section`
       .name,
       .role {
         font-family: var(--font-marvel);
+      }
+
+      .name{
+        &:hover{
+          cursor: pointer;
+          color: var(--marvel-red);
+          transform: scale(1.1);
+        }
       }
     }
   }

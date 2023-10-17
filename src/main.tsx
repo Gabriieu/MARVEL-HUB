@@ -4,6 +4,7 @@ import { ResetStyle } from "./styles/resetStyles.ts";
 import { GlobalStyle } from "./styles/globalStyles.ts";
 import { MainProvider } from "./provider/main.provider.tsx";
 import { BrowserRouter } from "react-router-dom";
+import { CreatorProvider } from "./provider/creator.provider.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <>
@@ -11,7 +12,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <GlobalStyle />
     <BrowserRouter>
       <MainProvider>
-        <App />
+        <CreatorProvider>
+          <App />
+        </CreatorProvider>
       </MainProvider>
     </BrowserRouter>
   </>

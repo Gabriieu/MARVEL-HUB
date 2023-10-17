@@ -8,6 +8,7 @@ export const SerieCardStyle = styled.li`
   padding: 0.5rem;
   margin: 0.7rem;
   border-radius: 8px;
+  width: 250px;
 
   img {
     width: 250px;

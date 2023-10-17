@@ -7,10 +7,12 @@ export const ComicCardStyle = styled.li`
   padding: 0.5rem;
   margin: 0.7rem;
   border-radius: 8px;
+  width: 250px;
 
   img {
     width: 250px;
     max-height: 350px;
+    border-bottom: 5px solid var(--marvel-red);
   }
   h2 {
     font-family: var(--font-marvel);
@@ -26,8 +28,5 @@ export const ComicCardStyle = styled.li`
     box-shadow: 11px 11px 11px rgba(0, 0, 0, 0.5);
     background-color: rgba(0, 0, 0, 0.9);
     color: white;
-    img{
-      border-bottom: 5px solid var(--marvel-red);
-    }
   }
 `;
