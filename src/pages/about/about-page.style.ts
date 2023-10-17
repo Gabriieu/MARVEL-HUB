@@ -8,7 +8,7 @@ export const AboutPageStyle = styled.main`
 
   > div {
     margin: 0 0 1rem 0;
-    h1 {
+    h1, h2 {
       font-family: var(--font-marvel);
       font-size: 24px;
       margin-bottom: 1rem;
@@ -25,7 +25,10 @@ export const AboutPageStyle = styled.main`
       ol{
         li{
             padding: 1rem 0 1rem 0;
-
+            background-color: rgba(0, 0, 0, 0.05);
+            margin-bottom: .5rem;
+            border-radius: 8px;
+            padding: .5rem;
             h2{
                 padding-bottom: 1rem;
             }

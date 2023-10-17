@@ -44,9 +44,9 @@ export const AboutPage = () => {
                 <h2>Acesso a Quadrinhos e Séries</h2>
                 <p>
                   Os entusiastas dos quadrinhos e fãs de séries da Marvel podem
-                  encontrar facilmente informações sobre publicações, arcos de
-                  histórias, equipes criativas, datas de lançamento e muito
-                  mais.
+                  encontrar facilmente informações sobre publicações, prefácio
+                  dos quadrinhos, seus respectivos criadores, datas de
+                  lançamento e mais.
                 </p>
               </li>
               <li>
@@ -95,14 +95,28 @@ export const AboutPage = () => {
           <ObsContainer>
             <h1>Observações Importantes</h1>
             <p>
-              Por limitações da API da Marvel, a chave utilizada neste projeto
+              <h1>Limitações</h1>
+              Por limitação da API da Marvel, a chave utilizada neste projeto
               para as requisições dos dados tem um limite diário de 3000
               requisições, portanto é possível que você não consiga usufruir
               100% da aplicação caso esse limite diário já tenha sido atingido.
               Vale ressaltar também que a API pode impôr um delay entre as
               requisições caso o usuário (você) faça muitas requisições em um
               intervalo pequeno de tempo. (caso o timeout de 7 segundos seja
-              atingido, aguarde alguns segundos e recarregue a página)
+              atingido, aguarde alguns segundos e recarregue a página).
+            </p>
+            <p>
+              Os dados estão disponíveis em inglês devido à limitação da API,
+              que fornece as informações exclusivamente nesse idioma.
+            </p>
+            <p>
+              <h1>Bugs</h1>
+              Como parte da minha prática regular, faço revisões constantes e
+              busco por possíveis falhas nos meus projetos. Portanto, se você
+              encontrar algum bug ou problema, é possível que eu ainda não tenha
+              identificado ou esteja no processo de correção. Ficarei muito
+              grato se você puder me informar sobre qualquer falha diretamente
+              pelo LinkedIn. A sua contribuição é valiosa e apreciada!
             </p>
           </ObsContainer>
         </div>
