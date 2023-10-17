@@ -35,10 +35,19 @@ export const CreatorPage = () => {
       }
     }
   };
+  
   const handleLoadingSeries = async () => {
-    setLoadingSeries(true);
-    await getCreatorSeries(Number(creatorId));
-    setLoadingSeries(false);
+    try {
+      setLoadingSeries(true);
+      await getCreatorSeries(Number(creatorId));
+      setLoadingSeries(false);
+    } catch (error: any | AxiosError) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.message);
+      } else {
+        console.log(error);
+      }
+    }
   };
 
   useEffect(() => {

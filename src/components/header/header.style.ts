@@ -77,6 +77,10 @@ export const ContainerMobile = styled.div`
   @media (min-width: 768px) {
     max-width: 50vw;
   }
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
 `;
 
 export const ContainerDesktop = styled.div`

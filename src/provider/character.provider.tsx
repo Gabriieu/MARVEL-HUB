@@ -21,15 +21,15 @@ interface iCharacterContext {
   characterSeries: [] | iSerie[];
   setCharacterSeries: React.Dispatch<React.SetStateAction<[] | iSerie[]>>;
   getCharacterSeries: (characterId: number) => Promise<void>;
-  getAllCharacterComics: (characterId: number) => Promise<void>;
-  getAllCharacterSeries: (characterId: number) => Promise<void>;
 }
 
 export const CharacterContext = createContext({} as iCharacterContext);
 
 export const CharacterProvider = ({ children }: iCharacterProviderProps) => {
   const hash = hashKey();
-  const quantity = 10;
+  const quantity = 20;
+  const [comicsOffset, setComicsOffSet] = useState<number>(0);
+  const [seriesOffset, setSeriesOffSet] = useState<number>(0);
   const [character, setCharacter] = useState<iHero | null>(null);
   const [characterComics, setCharacterComics] = useState<iComic[] | []>([]);
   const [characterSeries, setCharacterSeries] = useState<iSerie[] | []>([]);
@@ -38,7 +38,6 @@ export const CharacterProvider = ({ children }: iCharacterProviderProps) => {
     try {
       const response = await api.get(`/characters/${characterId}?${hash}`);
       setCharacter(response.data.data.results[0]);
-      console.log(response.data.data.results[0]);
     } catch (error: any | AxiosError) {
       if (axios.isAxiosError(error)) {
         toast.error(error.message);
@@ -51,24 +50,12 @@ export const CharacterProvider = ({ children }: iCharacterProviderProps) => {
   const getCharacterComics = async (characterId: number) => {
     try {
       const response = await api.get(
-        `/characters/${characterId}/comics?limit=${quantity}${hash}`
+        `/characters/${characterId}/comics?limit=${quantity}&offset=${
+          comicsOffset * quantity
+        }${hash}`
       );
-      setCharacterComics(response.data.data.results);
-    } catch (error: any | AxiosError) {
-      if (axios.isAxiosError(error)) {
-        toast.error(error.message);
-      } else {
-        console.log(error);
-      }
-    }
-  };
-
-  const getAllCharacterComics = async (characterId: number) => {
-    try {
-      const response = await api.get(
-        `/characters/${characterId}/comics?${hash}`
-      );
-      setCharacterComics(response.data.data.results);
+      setCharacterComics([...characterComics, ...response.data.data.results]);
+      setComicsOffSet(comicsOffset + 1);
     } catch (error: any | AxiosError) {
       if (axios.isAxiosError(error)) {
         toast.error(error.message);
@@ -81,9 +68,12 @@ export const CharacterProvider = ({ children }: iCharacterProviderProps) => {
   const getCharacterSeries = async (characterId: number) => {
     try {
       const response = await api.get(
-        `/characters/${characterId}/series?limit=${quantity}${hash}`
+        `/characters/${characterId}/series?limit=${quantity}&offset=${
+          seriesOffset * quantity
+        }${hash}`
       );
-      setCharacterSeries(response.data.data.results);
+      setCharacterSeries([...characterSeries, ...response.data.data.results]);
+      setSeriesOffSet(comicsOffset + 1);
     } catch (error: any | AxiosError) {
       if (axios.isAxiosError(error)) {
         toast.error(error.message);
@@ -93,28 +83,12 @@ export const CharacterProvider = ({ children }: iCharacterProviderProps) => {
     }
   };
 
-  const getAllCharacterSeries = async (characterId: number) => {
-    try {
-      const response = await api.get(
-        `/characters/${characterId}/series?${hash}`
-      );
-      setCharacterSeries(response.data.data.results);
-    } catch (error: any | AxiosError) {
-      if (axios.isAxiosError(error)) {
-        toast.error(error.message);
-      } else {
-        console.log(error);
-      }
-    }
-  };
   return (
     <CharacterContext.Provider
       value={{
         character,
         characterComics,
         characterSeries,
-        getAllCharacterComics,
-        getAllCharacterSeries,
         getCharacterById,
         getCharacterComics,
         getCharacterSeries,

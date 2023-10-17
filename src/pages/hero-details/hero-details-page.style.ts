@@ -98,6 +98,8 @@ export const HeroComicsSectionPageStyle = styled.section`
       border-radius: 8px;
       color: white;
       font-size: unset;
+      font-family: var(--font-marvel);
+      text-align: center;
 
       &:hover {
         cursor: pointer;
@@ -111,7 +113,7 @@ export const HeroComicsSectionPageStyle = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+
     span {
       font-family: var(--font-marvel);
       font-size: 1.5rem;
@@ -165,6 +167,8 @@ export const HeroSeriesSectionPageStyle = styled.section`
       border-radius: 8px;
       color: white;
       font-size: unset;
+      font-family: var(--font-marvel);
+      text-align: center;
 
       &:hover {
         cursor: pointer;

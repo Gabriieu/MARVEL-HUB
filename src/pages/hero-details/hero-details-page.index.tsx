@@ -1,6 +1,6 @@
 import { Header } from "../../components/header/header.index";
 import { Footer } from "../../components/footer/footer.index";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   HeroComicsSectionPageStyle,
@@ -13,6 +13,8 @@ import deadPoolChibi from "../../assets/deadpool-chibi.png";
 import thorChibi from "../../assets/thor-chibi.png";
 import { SerieCard } from "../../components/serie-card/serie-card.index";
 import { CharacterContext } from "../../provider/character.provider";
+import axios, { AxiosError } from "axios";
+import { toast } from "react-toastify";
 
 export const HeroDetailsPage = () => {
   const { characterId } = useParams();
@@ -20,12 +22,40 @@ export const HeroDetailsPage = () => {
     character,
     characterComics,
     characterSeries,
-    getAllCharacterComics,
-    getAllCharacterSeries,
     getCharacterById,
     getCharacterComics,
     getCharacterSeries,
   } = useContext(CharacterContext);
+  const [loadingComics, setLoadingComics] = useState<boolean>(false);
+  const [loadingSeries, setLoadingSeries] = useState<boolean>(false);
+
+  const handleLoadingComics = async () => {
+    try {
+      setLoadingComics(true);
+      await getCharacterComics(Number(characterId));
+      setLoadingComics(false);
+    } catch (error: any | AxiosError) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.message);
+      } else {
+        console.log(error);
+      }
+    }
+  };
+
+  const handleLoadingSeries = async () => {
+    try {
+      setLoadingSeries(true);
+      await getCharacterSeries(Number(characterId));
+      setLoadingSeries(false);
+    } catch (error: any | AxiosError) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.message);
+      } else {
+        console.log(error);
+      }
+    }
+  };
 
   useEffect(() => {
     getCharacterById(Number(characterId));
@@ -79,14 +109,19 @@ export const HeroDetailsPage = () => {
                     ))}
                   </ul>
                 )}
-                {characterComics.length < character.comics.available && (
-                  <h1
-                    id="see-all-comics"
-                    onClick={() => getAllCharacterComics(Number(characterId))}
-                  >
-                    Show all comics
-                  </h1>
-                )}
+                {characterComics.length < character.comics.available &&
+                  (loadingComics ? (
+                    <button id="see-all-comics" disabled={true}>
+                      Loading...
+                    </button>
+                  ) : (
+                    <button
+                      id="see-all-comics"
+                      onClick={() => handleLoadingComics()}
+                    >
+                      Load more
+                    </button>
+                  ))}
               </div>
             </HeroComicsSectionPageStyle>
             <HeroSeriesSectionPageStyle>
@@ -105,12 +140,17 @@ export const HeroDetailsPage = () => {
                   </ul>
                 )}
                 {characterSeries.length < character.series.available && (
-                  <h1
+                  loadingSeries ? (<button
                     id="see-all-series"
-                    onClick={() => getAllCharacterSeries(Number(characterId))}
+                    disabled={true}
                   >
-                    Show all series
-                  </h1>
+                    Loading...
+                  </button>): (<button
+                    id="see-all-series"
+                    onClick={() => handleLoadingSeries()}
+                  >
+                    Load more
+                  </button>)
                 )}
               </div>
             </HeroSeriesSectionPageStyle>
