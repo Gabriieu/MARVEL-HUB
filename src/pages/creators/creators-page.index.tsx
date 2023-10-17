@@ -1,6 +1,4 @@
 import { useState, useEffect, useContext } from "react";
-import { iCreator } from "../../provider/types/@types-creator";
-import { hashKey } from "../../services/api/hash";
 import { useParams } from "react-router-dom";
 import { Header } from "../../components/header/header.index";
 import { Footer } from "../../components/footer/footer.index";
@@ -9,6 +7,7 @@ import { CreatorPageStyle } from "./creators-page.style";
 import { ComicCard } from "../../components/comic-card/comic-card.index";
 import { SerieCard } from "../../components/serie-card/serie-card.index";
 import { CreatorContext } from "../../provider/creator.provider";
+import axios, { AxiosError } from "axios";
 
 export const CreatorPage = () => {
   const {
@@ -17,16 +16,24 @@ export const CreatorPage = () => {
     creatorComics,
     getCreatorComics,
     creatorSeries,
-    getCreatorSeries, setCreator, setCreatorComics, setCreatorSeries
+    getCreatorSeries,
   } = useContext(CreatorContext);
   const { creatorId } = useParams();
   const [loadingComics, setLoadingComics] = useState<boolean>(false);
   const [loadingSeries, setLoadingSeries] = useState<boolean>(false);
 
   const handleLoadingComics = async () => {
-    setLoadingComics(true);
-    await getCreatorComics(Number(creatorId));
-    setLoadingComics(false);
+    try {
+      setLoadingComics(true);
+      await getCreatorComics(Number(creatorId));
+      setLoadingComics(false);
+    } catch (error: any | AxiosError) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.message);
+      } else {
+        console.log(error);
+      }
+    }
   };
   const handleLoadingSeries = async () => {
     setLoadingSeries(true);
@@ -34,19 +41,18 @@ export const CreatorPage = () => {
     setLoadingSeries(false);
   };
 
-
   useEffect(() => {
     getCreatorInfo(Number(creatorId));
-    if(creatorComics.length === 0){
+    if (creatorComics.length === 0) {
       toast.promise(getCreatorComics(Number(creatorId)), {
         pending: `Getting ${creator?.firstName}'s comics`,
       });
     }
-    if(creatorSeries.length ===  0){
+    if (creatorSeries.length === 0) {
       toast.promise(getCreatorSeries(Number(creatorId)), {
         pending: `Getting ${creator?.firstName}'s series`,
-      }); 
-    }  
+      });
+    }
   }, []);
 
   return (

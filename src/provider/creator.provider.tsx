@@ -13,13 +13,13 @@ interface iCreatorProviderProps {
 
 interface iCreatorContext {
   creator: iCreator | null;
-  setCreator: React.Dispatch<React.SetStateAction<iCreator | null>>
+  setCreator: React.Dispatch<React.SetStateAction<iCreator | null>>;
   getCreatorInfo: (creatorId: number) => Promise<void>;
   creatorComics: [] | iComic[];
-  setCreatorComics: React.Dispatch<React.SetStateAction<[] | iComic[]>>
+  setCreatorComics: React.Dispatch<React.SetStateAction<[] | iComic[]>>;
   getCreatorComics: (creatorId: number) => Promise<void>;
   creatorSeries: [] | iSerie[];
-  setCreatorSeries: React.Dispatch<React.SetStateAction<[] | iSerie[]>>
+  setCreatorSeries: React.Dispatch<React.SetStateAction<[] | iSerie[]>>;
   getCreatorSeries: (creatorId: number) => Promise<void>;
 }
 
@@ -27,7 +27,7 @@ export const CreatorContext = createContext({} as iCreatorContext);
 
 export const CreatorProvider = ({ children }: iCreatorProviderProps) => {
   const hash = hashKey();
-  const requisitionQuantity = 1;
+  const requisitionQuantity = 10;
   const [comicsOffset, setComicsOffSet] = useState<number>(0);
   const [seriesOffset, setSeriesOffSet] = useState<number>(0);
   const [creator, setCreator] = useState<iCreator | null>(null);
@@ -35,16 +35,16 @@ export const CreatorProvider = ({ children }: iCreatorProviderProps) => {
   const [creatorSeries, setCreatorSeries] = useState<iSerie[] | []>([]);
 
   const getCreatorInfo = async (creatorId: number) => {
-      try {
-        const response = await api.get(`/creators/${creatorId}?${hash}`);
-        setCreator(response.data.data.results[0]);
-      } catch (error: any | AxiosError) {
-        if (axios.isAxiosError(error)) {
-          toast.error(error.message);
-        } else {
-          console.log(error);
-        }
+    try {
+      const response = await api.get(`/creators/${creatorId}?${hash}`);
+      setCreator(response.data.data.results[0]);
+    } catch (error: any | AxiosError) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.message);
+      } else {
+        console.log(error);
       }
+    }
   };
 
   const getCreatorComics = async (creatorId: number) => {
@@ -56,7 +56,6 @@ export const CreatorProvider = ({ children }: iCreatorProviderProps) => {
       );
       setCreatorComics([...creatorComics, ...response.data.data.results]);
       setComicsOffSet(comicsOffset + 1);
-      console.log(response.data);
     } catch (error: any | AxiosError) {
       if (axios.isAxiosError(error)) {
         toast.error(error.message);
@@ -75,7 +74,6 @@ export const CreatorProvider = ({ children }: iCreatorProviderProps) => {
       );
       setCreatorSeries([...creatorSeries, ...response.data.data.results]);
       setSeriesOffSet(seriesOffset + 1);
-      console.log(response.data);
     } catch (error: any | AxiosError) {
       if (axios.isAxiosError(error)) {
         toast.error(error.message);
@@ -92,7 +90,10 @@ export const CreatorProvider = ({ children }: iCreatorProviderProps) => {
         creatorComics,
         getCreatorComics,
         creatorSeries,
-        getCreatorSeries, setCreator, setCreatorComics,setCreatorSeries
+        getCreatorSeries,
+        setCreator,
+        setCreatorComics,
+        setCreatorSeries,
       }}
     >
       {children}

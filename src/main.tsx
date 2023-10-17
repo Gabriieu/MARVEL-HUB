@@ -5,6 +5,7 @@ import { GlobalStyle } from "./styles/globalStyles.ts";
 import { MainProvider } from "./provider/main.provider.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { CreatorProvider } from "./provider/creator.provider.tsx";
+import { CharacterProvider } from "./provider/character.provider.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <>
@@ -13,7 +14,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
       <MainProvider>
         <CreatorProvider>
-          <App />
+          <CharacterProvider>
+            <App />
+          </CharacterProvider>
         </CreatorProvider>
       </MainProvider>
     </BrowserRouter>

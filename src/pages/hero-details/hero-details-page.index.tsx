@@ -1,119 +1,40 @@
 import { Header } from "../../components/header/header.index";
 import { Footer } from "../../components/footer/footer.index";
-import { useEffect, useState } from "react";
+import { useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { api } from "../../services/api/api";
-import { hashKey } from "../../services/api/hash";
-import { iHero } from "../../provider/types/@types-hero";
-import axios, { AxiosError } from "axios";
-import { toast } from "react-toastify";
 import {
   HeroComicsSectionPageStyle,
   HeroDetailsMainStyle,
   HeroDetailsSectionPageStyle,
   HeroSeriesSectionPageStyle,
 } from "./hero-details-page.style";
-import { iComic } from "../../provider/types/@types-comic";
 import { ComicCard } from "../../components/comic-card/comic-card.index";
 import deadPoolChibi from "../../assets/deadpool-chibi.png";
 import thorChibi from "../../assets/thor-chibi.png";
-import { iSerie } from "../../provider/types/@types-series";
 import { SerieCard } from "../../components/serie-card/serie-card.index";
+import { CharacterContext } from "../../provider/character.provider";
 
 export const HeroDetailsPage = () => {
-  const hash = hashKey();
   const { characterId } = useParams();
-  const quantity: number = 6;
-
-  const [character, setCharacter] = useState<iHero | null>(null);
-  const [characterRecentComics, setCharacterRecentComics] = useState<
-    iComic[] | []
-  >([]);
-  const [characterRecentSeries, setCharacterRecentSeries] = useState<
-    iSerie[] | []
-  >([]);
-  const [displayComicButton, setDisplayComicButton] = useState<boolean>(true);
-  const [displaySerieButton, setDisplaySerieButton] = useState<boolean>(true);
-
-  const getHeroById = async (characterId: number) => {
-    try {
-      const response = await api.get(`/characters/${characterId}?${hash}`);
-      setCharacter(response.data.data.results[0]);
-    } catch (error: any | AxiosError) {
-      if (axios.isAxiosError(error)) {
-        toast.error(error.message);
-      } else {
-        console.log(error);
-      }
-    }
-  };
-
-  const getHeroComics = async (characterId: number) => {
-    try {
-      const response = await api.get(
-        `/characters/${characterId}/comics?orderBy=-focDate&limit=${quantity}${hash}`
-      );
-      setCharacterRecentComics(response.data.data.results);
-    } catch (error: any | AxiosError) {
-      if (axios.isAxiosError(error)) {
-        toast.error(error.message);
-      } else {
-        console.log(error);
-      }
-    }
-  };
-
-  const getAllHeroComics = async (characterId: number) => {
-    try {
-      const response = await api.get(
-        `/characters/${characterId}/comics?${hash}`
-      );
-      setCharacterRecentComics(response.data.data.results);
-      setDisplayComicButton(false);
-    } catch (error: any | AxiosError) {
-      if (axios.isAxiosError(error)) {
-        toast.error(error.message);
-      } else {
-        console.log(error);
-      }
-    }
-  };
-
-  const getHeroSeries = async (characterId: number) => {
-    try {
-      const response = await api.get(
-        `/characters/${characterId}/series?orderBy=-startYear&limit=${quantity}${hash}`
-      );
-      setCharacterRecentSeries(response.data.data.results);
-    } catch (error: any | AxiosError) {
-      if (axios.isAxiosError(error)) {
-        toast.error(error.message);
-      } else {
-        console.log(error);
-      }
-    }
-  };
-
-  const getAllHeroSeries = async (characterId: number) => {
-    try {
-      const response = await api.get(
-        `/characters/${characterId}/series?${hash}`
-      );
-      setCharacterRecentSeries(response.data.data.results);
-      setDisplaySerieButton(false);
-    } catch (error: any | AxiosError) {
-      if (axios.isAxiosError(error)) {
-        toast.error(error.message);
-      } else {
-        console.log(error);
-      }
-    }
-  };
+  const {
+    character,
+    characterComics,
+    characterSeries,
+    getAllCharacterComics,
+    getAllCharacterSeries,
+    getCharacterById,
+    getCharacterComics,
+    getCharacterSeries,
+  } = useContext(CharacterContext);
 
   useEffect(() => {
-    getHeroById(Number(characterId));
-    getHeroComics(Number(characterId));
-    getHeroSeries(Number(characterId));
+    getCharacterById(Number(characterId));
+    if (characterComics.length === 0) {
+      getCharacterComics(Number(characterId));
+    }
+    if (characterSeries.length === 0) {
+      getCharacterSeries(Number(characterId));
+    }
   }, []);
 
   return (
@@ -146,22 +67,22 @@ export const HeroDetailsPage = () => {
             <HeroComicsSectionPageStyle>
               <div id="character-latest-comics">
                 <h1>{`${character.name}'s comics`.toUpperCase()}</h1>
-                {characterRecentComics.length === 0 ? (
+                {characterComics.length === 0 ? (
                   <div id="empty">
                     <span>There are no comics</span>
                     <img src={deadPoolChibi} alt="Not found" />
                   </div>
                 ) : (
                   <ul>
-                    {characterRecentComics.map((comic) => (
+                    {characterComics.map((comic) => (
                       <ComicCard comic={comic} key={comic.id} />
                     ))}
                   </ul>
                 )}
-                {displayComicButton && (
+                {characterComics.length < character.comics.available && (
                   <h1
                     id="see-all-comics"
-                    onClick={() => getAllHeroComics(character.id)}
+                    onClick={() => getAllCharacterComics(Number(characterId))}
                   >
                     Show all comics
                   </h1>
@@ -171,22 +92,22 @@ export const HeroDetailsPage = () => {
             <HeroSeriesSectionPageStyle>
               <div id="character-latest-series">
                 <h1>{`${character.name} series`.toUpperCase()}</h1>
-                {characterRecentSeries.length === 0 ? (
+                {characterSeries.length === 0 ? (
                   <div id="empty">
                     <span>There are no series</span>
                     <img src={thorChibi} alt="Not found" />
                   </div>
                 ) : (
                   <ul>
-                    {characterRecentSeries.map((serie) => (
+                    {characterSeries.map((serie) => (
                       <SerieCard serie={serie} key={serie.id} />
                     ))}
                   </ul>
                 )}
-                {displaySerieButton && (
+                {characterSeries.length < character.series.available && (
                   <h1
                     id="see-all-series"
-                    onClick={() => getAllHeroSeries(character.id)}
+                    onClick={() => getAllCharacterSeries(Number(characterId))}
                   >
                     Show all series
                   </h1>
