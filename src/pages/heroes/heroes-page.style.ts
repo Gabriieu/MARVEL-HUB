@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import backgroundImage from "../../assets/background-image.jpg";
+//import backgroundImage from "../../assets/background-image.jpg";
 import backgroundImage2 from "../../assets/background-image-2.jpg";
+import gif from "../../assets/marvel-gif.gif"
 
 export const HeroPageStyle = styled.main`
   width: 100vw;
@@ -15,12 +16,12 @@ export const HeroPageStyle = styled.main`
 
 export const ContainerTopSection = styled.section`
   height: 50vh;
-  background-image: url(${backgroundImage});
+  background-image: url(${gif});
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
-  box-shadow: inset 0px 0px 175px 175px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 100vw 0 0 0 rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
 
@@ -35,9 +36,9 @@ export const ContainerTopSection = styled.section`
     color: white;
 
     h1 {
-      font-family: var(--font-marvel);
-      font-size: 2rem;
+      font-size: 2.5rem;
       text-shadow: 1px 2px black;
+      text-align: center;
     }
 
     p {
@@ -46,7 +47,12 @@ export const ContainerTopSection = styled.section`
       text-shadow: 0.5px 0 black, -0.5px 0 black, 0 0.5px black, 0 -0.5px black,
         0.5px 0.5px black, -0.5px -0.5px black, 0.5px -0.5px black,
         -0.5px 0.5px black;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-family: cursive;
+      font-weight: 900;
+    }
+
+    @media(min-width: 1024px){
+      max-width: 50%;
     }
   }
 `;

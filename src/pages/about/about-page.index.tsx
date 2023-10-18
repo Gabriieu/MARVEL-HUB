@@ -91,6 +91,9 @@ export const AboutPage = () => {
               para fins informativos e não comerciais, com o devido respeito aos
               direitos autorais e marcas registradas.
             </p>
+            <p>
+              A API utilizada é gratuita e pode ser acessada  <a target="_blank" href="https://developer.marvel.com/">neste link</a>
+            </p>
           </MarvelContainer>
           <ObsContainer>
             <h1>Observações Importantes</h1>
@@ -116,7 +119,7 @@ export const AboutPage = () => {
               encontrar algum bug ou problema, é possível que eu ainda não tenha
               identificado ou esteja no processo de correção. Ficarei muito
               grato se você puder me informar sobre qualquer falha diretamente
-              pelo LinkedIn. A sua contribuição é valiosa e apreciada!
+              pelo <a target="_blank" href="https://www.linkedin.com/in/jos%C3%A9gabrielsouza/">LinkedIn</a>. A sua contribuição é valiosa e apreciada!
             </p>
           </ObsContainer>
         </div>

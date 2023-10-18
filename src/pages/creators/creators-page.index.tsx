@@ -54,12 +54,12 @@ export const CreatorPage = () => {
     getCreatorInfo(Number(creatorId));
     if (creatorComics.length === 0) {
       toast.promise(getCreatorComics(Number(creatorId)), {
-        pending: `Getting ${creator?.firstName}'s comics`,
+        pending: "Getting Comics",
       });
     }
     if (creatorSeries.length === 0) {
       toast.promise(getCreatorSeries(Number(creatorId)), {
-        pending: `Getting ${creator?.firstName}'s series`,
+        pending: "Getting Series",
       });
     }
   }, []);

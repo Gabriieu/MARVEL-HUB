@@ -6,7 +6,6 @@ import { iSerie } from "./types/@types-series";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { api } from "../services/api/api";
-import { useParams } from "react-router-dom";
 
 interface iCharacterProviderProps {
   children: React.ReactNode;
@@ -31,7 +30,6 @@ export const CharacterContext = createContext({} as iCharacterContext);
 export const CharacterProvider = ({ children }: iCharacterProviderProps) => {
   const hash = hashKey();
   const quantity = 20;
-  const { characterId } = useParams();
   const [comicsOffset, setComicsOffSet] = useState<number>(0);
   const [seriesOffset, setSeriesOffSet] = useState<number>(0);
   const [character, setCharacter] = useState<iHero | null>(null);

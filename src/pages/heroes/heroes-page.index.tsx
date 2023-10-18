@@ -95,8 +95,7 @@ export const HeroesPage = () => {
           <div>
             <h1>MARVEL CHARACTERS</h1>
             <p>
-              Marvel invites you to become involved in a universe full of heroes
-              and villains that will captivate you!
+            MARVEL INVITES YOU TO BECOME INVOLVED IN A UNIVERSE FULL OF HEROES AND VILLAINS THAT WILL CAPTIVATE YOU!
             </p>
           </div>
         </ContainerTopSection>

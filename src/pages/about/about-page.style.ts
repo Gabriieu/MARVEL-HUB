@@ -5,6 +5,17 @@ export const AboutPageStyle = styled.main`
   padding-top: 75px;
   display: flex;
   flex-direction: row;
+  a{
+    text-decoration: none;
+    color: var(--marvel-red);
+    font-weight: 600;
+
+    &:hover{
+      background-color: var(--marvel-red);
+      color: white;
+      border-radius: 8px;
+    }
+  }
 
   > div {
     margin: 0 0 1rem 0;
