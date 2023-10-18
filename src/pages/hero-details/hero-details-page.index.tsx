@@ -23,8 +23,10 @@ export const HeroDetailsPage = () => {
     characterComics,
     characterSeries,
     getCharacterById,
-    getCharacterComics,
-    getCharacterSeries,
+    getMoreCharacterComics,
+    getMoreCharacterSeries,
+    getNewCharacterComics,
+    getNewCharacterSeries,setCharacter,setCharacterComics,setCharacterSeries
   } = useContext(CharacterContext);
   const [loadingComics, setLoadingComics] = useState<boolean>(false);
   const [loadingSeries, setLoadingSeries] = useState<boolean>(false);
@@ -32,7 +34,7 @@ export const HeroDetailsPage = () => {
   const handleLoadingComics = async () => {
     try {
       setLoadingComics(true);
-      await getCharacterComics(Number(characterId));
+      await getMoreCharacterComics(Number(characterId));
       setLoadingComics(false);
     } catch (error: any | AxiosError) {
       if (axios.isAxiosError(error)) {
@@ -46,7 +48,7 @@ export const HeroDetailsPage = () => {
   const handleLoadingSeries = async () => {
     try {
       setLoadingSeries(true);
-      await getCharacterSeries(Number(characterId));
+      await getMoreCharacterSeries(Number(characterId));
       setLoadingSeries(false);
     } catch (error: any | AxiosError) {
       if (axios.isAxiosError(error)) {
@@ -58,13 +60,19 @@ export const HeroDetailsPage = () => {
   };
 
   useEffect(() => {
-    getCharacterById(Number(characterId));
-    if (characterComics.length === 0) {
-      getCharacterComics(Number(characterId));
+    if (character !== null) {
+      setCharacter(null)
+      setCharacterComics([])
+      setCharacterSeries([])
+      getCharacterById(Number(characterId));
+      getNewCharacterComics(Number(characterId));
+      getNewCharacterSeries(Number(characterId));
+    } else {
+      getCharacterById(Number(characterId));
+      getMoreCharacterComics(Number(characterId));
+      getMoreCharacterSeries(Number(characterId));
     }
-    if (characterSeries.length === 0) {
-      getCharacterSeries(Number(characterId));
-    }
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, []);
 
   return (
@@ -139,19 +147,19 @@ export const HeroDetailsPage = () => {
                     ))}
                   </ul>
                 )}
-                {characterSeries.length < character.series.available && (
-                  loadingSeries ? (<button
-                    id="see-all-series"
-                    disabled={true}
-                  >
-                    Loading...
-                  </button>): (<button
-                    id="see-all-series"
-                    onClick={() => handleLoadingSeries()}
-                  >
-                    Load more
-                  </button>)
-                )}
+                {characterSeries.length < character.series.available &&
+                  (loadingSeries ? (
+                    <button id="see-all-series" disabled={true}>
+                      Loading...
+                    </button>
+                  ) : (
+                    <button
+                      id="see-all-series"
+                      onClick={() => handleLoadingSeries()}
+                    >
+                      Load more
+                    </button>
+                  ))}
               </div>
             </HeroSeriesSectionPageStyle>
           </HeroDetailsMainStyle>
