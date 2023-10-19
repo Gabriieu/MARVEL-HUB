@@ -5,6 +5,7 @@ import { iHero } from "./types/@types-hero";
 import { hashKey } from "../services/api/hash";
 import { iEvent } from "./types/@types-event";
 import axios, { AxiosError } from "axios";
+import { iComic } from "./types/@types-comic";
 
 interface iMainProviderProps {
   children: React.ReactNode;
@@ -25,6 +26,11 @@ interface iMainContext {
   setTotalPages: React.Dispatch<React.SetStateAction<number>>;
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  newestComics: [] | iComic[];
+  getNewestComics: (dateRange: {
+    today: string;
+    sixMonthBefore: string;
+  }) => Promise<void>;
 }
 
 export const MainContext = createContext({} as iMainContext);
@@ -38,6 +44,7 @@ export const MainProvider = ({ children }: iMainProviderProps) => {
   const [heroesByName, setHeroesByName] = useState<iHero[] | []>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(0);
+  const [newestComics, setNewestComics] = useState<iComic[] | []>([]);
 
   const getEvents = async () => {
     try {
@@ -104,6 +111,24 @@ export const MainProvider = ({ children }: iMainProviderProps) => {
     }
   };
 
+  const getNewestComics = async (dateRange: {
+    today: string;
+    sixMonthBefore: string;
+  }) => {
+    try {
+      const response = await api.get(
+        `/comics?dateRange=${`${dateRange.sixMonthBefore},${dateRange.today}`}&limit=20${hash}`
+      );
+      setNewestComics(response.data.data.results);
+    } catch (error: any | AxiosError) {
+      if (axios.isAxiosError(error)) {
+        toast.error(error.message);
+      } else {
+        console.log(error);
+      }
+    }
+  };
+
   return (
     <MainContext.Provider
       value={{
@@ -121,6 +146,8 @@ export const MainProvider = ({ children }: iMainProviderProps) => {
         setCurrentPage,
         totalPages,
         setTotalPages,
+        newestComics,
+        getNewestComics,
       }}
     >
       {children}
